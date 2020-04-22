@@ -73,7 +73,7 @@ class CPU:
             self.reg[reg_a] *= self.reg[reg_b]
         elif op == CPU.INST_DIV:
             self.reg[reg_a] //= self.reg[reg_b]
-        if op == CPU.INST_AND:
+        elif op == CPU.INST_AND:
             self.reg[reg_a] &= self.reg[reg_b]
         elif op == CPU.INST_OR:
             self.reg[reg_a] |= self.reg[reg_b]
@@ -127,11 +127,11 @@ class CPU:
         self.ram[address] = value
 
     def handle_interrupts(self):
-        self.time = datetime.now().second
+        self.time = datetime.now().second # Time interrupt
         if not self.time == self.time_prev:
             self.reg[6] |= 0b00000001
             self.time_prev = self.time
-        if msvcrt.kbhit():
+        if msvcrt.kbhit(): # Keyboard interrupt
             self.ram_write(0xF4, ord(msvcrt.getch()))
             self.reg[6] |= 0b00000010
         maskedInterrupts = self.reg[5] & self.reg[6]
