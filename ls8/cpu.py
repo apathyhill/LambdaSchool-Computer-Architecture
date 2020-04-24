@@ -160,7 +160,7 @@ class CPU:
                 inst = self.ram_read(self.pc)
                 a = self.ram_read(self.pc+1)
                 b = self.ram_read(self.pc+2)
-                # print(f"{inst:08b} {a:08b} {b:08b} {self.pc}")
+                # print(f"{inst:08b} {a:08b} {b:08b} {self.pc} {self.flag:03b} {self.reg[0]} {self.reg[1]}")
                 if inst & 0b00100000:
                     self.alu(inst, a, b)
                 elif inst == CPU.INST_LDI: # LDI
@@ -188,7 +188,7 @@ class CPU:
                     else:
                         inst &= ~0b00010000
                 elif inst == CPU.INST_JNE: # JNE
-                    if ~(self.flag & 1):
+                    if not self.flag & 1:
                         self.pc = self.reg[a]
                     else:
                         inst &= ~0b00010000

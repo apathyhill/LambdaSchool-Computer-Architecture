@@ -1,0 +1,37 @@
+10000010 # LDA R0, 0 (1nd fib num, 0)
+00000000
+00000000
+10000010 # LDA R1, 1 (2nd fib num, 1)
+00000001
+00000001
+10000010 # LDA R2, 0 (counter)
+00000010
+00000000
+10000010 # LDA R3, 15 (max counter)
+00000011
+00001111
+10000010 # LDA R4, 0 (set jump location)
+00000100
+00100100
+10100111 # CMP R2,R3 (if r2 == r3)
+00000010
+00000011
+01010101 # JEQ R4 (jump to halt)
+00000100
+01000111 # PRN R0 (print current fib num)
+00000000
+01000101 # PUSH R0 (save to stack)
+00000000
+10100000 # ADD R0, R1 (add fib nums together)
+00000000
+00000001
+01000110 # POP R1 (set last fib to R1)
+00000001
+01100101 # INC R2 (increment counter)
+00000010
+10000010 # LDA R4, 12 (set jump location)
+00000100
+00001100 
+01010100 # JMP R4 (jump to start of loop and check again)
+00000100
+00000001 # HLT (end)
